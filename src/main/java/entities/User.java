@@ -7,13 +7,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+@Entity
 public class User
 {
-
-	@Entity
-	public class UserData
-	{
-
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long id;
@@ -53,7 +50,7 @@ public class User
 		@OneToMany(mappedBy = "accounts",fetch=FetchType.LAZY)
 		private Set<Accounts> accounts;
 
-		public UserData(String firstName, String lastName, String cellnumber, String email, String password, String username, String managername, String ceousername, Set<Role> roles)
+		public User(String firstName,String lastName,String password, String username)
 		{
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -62,7 +59,7 @@ public class User
 			this.password = password;
 			this.username = username;
 			this.managername = managername;
-			this.ceoname = ceousername;
+			this.ceoname = ceoname;
 			this.roles = roles;
 			this.accounts=accounts;
 		}
@@ -168,7 +165,7 @@ public class User
 			this.roles = roles;
 		}
 
-		public UserData() {
+		public User() {
 			roles = new HashSet<>();
 		}
 		public void addRoles
@@ -179,6 +176,10 @@ public class User
 				(Accounts aaccount) {
 			accounts.add(aaccount);
 		}
+
+	public void setRoles(Role admin)
+	{
 	}
 }
+
 
